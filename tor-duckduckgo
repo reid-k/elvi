@@ -1,0 +1,22 @@
+#!/bin/sh
+# DESC: Elvi to search with DuckDuckGo's tor service
+# elvis: tor-duckduckgo          -- Search with duckduckgo's tor service (www.3g2upl4pq6kufc4m.onion)
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+Search with duckduckgo over tor (www.3g2upl4pq6kufc4m.onion)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+if test -z "$w3_args"; then
+    w3_browse_url "https://3g2upl4pq6kufc4m.onion/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "https://3g2upl4pq6kufc4m.onion/?q=${escaped_args}"
+fi

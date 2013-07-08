@@ -1,0 +1,22 @@
+#!/bin/sh
+# DESC: Elvi to search the Python 3 documentation
+# elvis: py2doc          -- Search Python 3 Docs (docs.python.org/3/)
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+Search Python 3 Docs (docs.python.org/3/)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+if test -z "$w3_args"; then
+    w3_browse_url "http://docs.python.org/3/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://docs.python.org/3/search.html?q=${escaped_args}"
+fi
