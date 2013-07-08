@@ -1,0 +1,22 @@
+#!/bin/sh
+# DESC: Elvi to search Hack a Day
+# elvis: hackaday        -- Search Hack a Day (www.hackaday.com)
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+Search Hack a Day (www.hackaday.com)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.hackaday.com"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://hackaday.com/?s=${escaped_args}"
+fi
