@@ -1,6 +1,6 @@
 #!/bin/sh
 # DESC: Elvi to search with DuckDuckGo's tor service
-# elvis: tor-duckduckgo          -- Search with duckduckgo's tor service (www.3g2upl4pq6kufc4m.onion)
+# elvis: tor-duckduckgo  -- Search with duckduckgo's tor service (www.3g2upl4pq6kufc4m.onion)
 . surfraw || exit 1
 
 w3_usage_hook () {

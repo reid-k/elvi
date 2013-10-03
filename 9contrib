@@ -1,0 +1,23 @@
+#!/bin/sh
+# DESC: Elvi to search Bell Labs' Plan 9 contrib repo
+# elvis: 9contrib        -- (U) Search Bell Labs' Plan 9 contrib repository
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+Search Bell Labs' Plan 9 contrib repository (http://plan9.bell-labs.com/sources/contrib/)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+if test -z "$w3_args"; then
+    w3_browse_url "http://plan9.bell-labs.com/sources/contrib/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    #TODO: Expand this to actually be useful, ideally without hammering BL's servers with requests 
+    w3_browse_url "http://plan9.bell-labs.com/sources/contrib/${escaped_args}"
+fi

@@ -1,6 +1,6 @@
 #!/bin/sh
 # DESC: Elvi to search Launchpad
-# elvis: launchpad -- Search Launchpad (www.launchpad.net)
+# elvis: launchpad       -- Search Launchpad (www.launchpad.net)
 . surfraw || exit 1
 
 w3_usage_hook () {

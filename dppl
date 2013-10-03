@@ -1,0 +1,22 @@
+#!/bin/sh
+# DESC: Elvi to search Des Plaines, IL Public Library Catalog
+# elvis: dppl            -- Search Des Plaines Public Library (www.dppl.org)
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+    Search Des Plaines Public Library (www.dppl.org)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+if test -z "$w3_args"; then
+    w3_browse_url "http://dppl.org"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://dppl.bibliocommons.com/search?t=smart&search_category=keyword&commit=Search&q=${escaped_args}"
+fi
