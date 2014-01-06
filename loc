@@ -1,0 +1,22 @@
+#!/bin/sh
+# DESC: Elvi to search Library of Congress
+# elvis: loc -- Search Library of Congress (www.loc.gov)
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+    Search Library of Congress (www.loc.gov)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+if test -z "$w3_args"; then
+    w3_browse_url "http://loc.gov"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://www.loc.gov/search/?q=${escaped_args}"
+fi
