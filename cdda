@@ -1,0 +1,22 @@
+#!/bin/sh
+# DESC: Elvi to search Cataclysm: Dark Days Ahead wik
+# elvis: cdda            -- Search Cataclysm: Dark Days Ahead wiki (wiki.cataclysmdda.com)
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+    Search Cataclysm: Dark Days Ahead wiki (wiki.cataclysmdda.com)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.wiki.cataclysmdda.com/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://www.wiki.cataclysmdda.com/index.php?search=$(escaped_args)"
+fi
